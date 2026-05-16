@@ -2,44 +2,65 @@
 
 using namespace std;
 
-int main() {
+int main()
+{
+
+  int d = 0;
   Grafo g(5);
 
-  g.adicionar_aresta(0, 1);
-  g.adicionar_aresta(0, 2);
-  g.adicionar_aresta(1, 3);
-  g.adicionar_aresta(2, 4);
+  cout << "inserir aresta" << endl;
+  g.adicionar_aresta(0, 1, d, 1);
+  g.adicionar_aresta(0, 2, d, 2);
+  g.adicionar_aresta(1, 3, d, 3);
+  g.adicionar_aresta(2, 4, d, 4);
 
   cout << "Grafo nao direcionado:" << endl;
   g.imprimir();
 
-  cout << "Busca em profundidade (recursiva):" << endl;
-  g.busca_profundidade_recursiva(0);
+  cout << "pesos" << endl;
+  g.imprimirPesos();
 
-  cout << "Busca em profundidade (iterativa):" << endl;
-  g.busca_profundidade_iterativa(0);
+  g.remover_aresta(0, 1, d);
+  cout << "Grafo nao direcionado:" << endl;
+  g.imprimir();
+  cout << "pesos" << endl;
+  g.imprimirPesos();
 
-  cout << "Busca em largura:";
-  g.busca_largura(0);
+  cout << "verificar aresta" << endl;
+  cout << g.verificar_aresta(0, 1, d) << endl;
+  cout << g.verificar_aresta(0, 2, d) << endl;
 
-  cout << endl;
+  g.alterar_peso(0, 2, d, 20);
+  cout << "imprimir pesos alterados" << endl;
+  g.imprimirPesos();
 
-  Grafo g_dir(6);
+  Grafo gdir(5);
+  d = 1;
+  cout << "inserir aresta" << endl;
+  gdir.adicionar_aresta(0, 1, d, 1);
+  gdir.adicionar_aresta(0, 2, d, 2);
+  gdir.adicionar_aresta(1, 3, d, 3);
+  gdir.adicionar_aresta(2, 4, d, 4);
 
-  g_dir.adicionar_aresta(5, 2, true);
-  g_dir.adicionar_aresta(5, 0, true);
-  g_dir.adicionar_aresta(4, 0, true);
-  g_dir.adicionar_aresta(4, 1, true);
-  g_dir.adicionar_aresta(2, 3, true);
-  g_dir.adicionar_aresta(3, 1, true);
+  cout << "Grafo nao direcionado:" << endl;
+  gdir.imprimir();
 
-  cout << "Grafo direcionado:" << endl;
-  g_dir.imprimir();
+  cout << "pesos" << endl;
+  gdir.imprimirPesos();
 
-  cout << "Ordenacao topologica:" << endl;
-  g_dir.ordenacao_topologica();
+  gdir.remover_aresta(0, 1, d);
+  cout << "Grafo nao direcionado:" << endl;
+  gdir.imprimir();
+  cout << "pesos" << endl;
+  gdir.imprimirPesos();
 
-  cout << "";
+  cout << "verificar aresta" << endl;
+  cout << gdir.verificar_aresta(0, 1, d) << endl;
+  cout << gdir.verificar_aresta(0, 2, d) << endl;
+
+  gdir.alterar_peso(0, 2, d, 20);
+  cout << "imprimir pesos alterados" << endl;
+  gdir.imprimirPesos();
 
   return 0;
 }
