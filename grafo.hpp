@@ -32,6 +32,8 @@ public:
 
     void adicionar_aresta(int u, int v, bool direcionado = false);
     void imprimir();
+    void  adicionar_vertice();
+    void remover_vertice(int n); 
 
     void busca_profundidade_recursiva(int inicio);
     void busca_profundidade_iterativa(int inicio);

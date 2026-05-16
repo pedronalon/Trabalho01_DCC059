@@ -31,6 +31,52 @@ void Grafo::adicionar_aresta(int u, int v, bool direcionado) {
         nos[u]->grau_entrada++;
     }
 }
+void Grafo::adicionar_vertice(){
+    int n = nos.size() ; 
+    nos.push_back(new No(n)) ; 
+    n++ ; 
+    num_vertices = n ; 
+}
+
+void Grafo::remover_vertice(int i) {
+    No* no_remover = nullptr;
+    int pos_grafo = 0;
+
+    for(No* no : nos) {
+        if(i == no->id) {
+            no_remover = no;
+            nos.erase(nos.begin() + pos_grafo); 
+            break; 
+        }
+        pos_grafo++; 
+    }
+
+    if(no_remover == nullptr) {
+        return;
+        cout << "Vertice não existe" << endl ; 
+    }
+
+    for(No* vizinho : no_remover->vizinhos) {
+        vizinho->grau_entrada--;
+    }
+
+
+
+    for(No* no : nos) {
+        int pos_vizinho = 0;
+        
+        for(No* vizinho : no->vizinhos) { 
+            if(i == vizinho->id) {
+                no->vizinhos.erase(no->vizinhos.begin() + pos_vizinho);
+                no->grau_saida--;
+                break; 
+            }
+            pos_vizinho++;
+        }
+    }
+
+    delete no_remover;
+}
 
 void Grafo::imprimir() {
     for (No* no : nos) {
