@@ -50,6 +50,10 @@ void Grafo::adicionar_vertice(){
     nos.push_back(new No(n)) ; 
     n++ ; 
     num_vertices = n ; 
+    for(int i = 0; i < matrizPesos.size(); i++) {
+        matrizPesos[i].push_back(0);
+    }
+    matrizPesos.push_back(vector<int>(num_vertices, 0));
 }
 
 void Grafo::remover_vertice(int i) {
@@ -60,6 +64,11 @@ void Grafo::remover_vertice(int i) {
         if(i == no->id) {
             no_remover = no;
             nos.erase(nos.begin() + pos_grafo); 
+            matrizPesos.erase(matrizPesos.begin() + pos_grafo);
+            for(int k = 0; k < matrizPesos.size(); k++) {
+        matrizPesos[k].erase(matrizPesos[k].begin() + pos_grafo);
+        num_vertices--;
+    }
             break; 
         }
         pos_grafo++; 
