@@ -40,7 +40,12 @@ public:
     void alterar_peso(int u, int v, bool direcionado, int peso);
 
     void imprimir();
+<<<<<<< HEAD
     void imprimirPesos();
+=======
+    void  adicionar_vertice();
+    void remover_vertice(int n); 
+>>>>>>> pedro
 
     void busca_profundidade_recursiva(int inicio);
     void busca_profundidade_iterativa(int inicio);
