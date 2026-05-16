@@ -75,8 +75,8 @@ void Grafo::remover_vertice(int i) {
     }
 
     if(no_remover == nullptr) {
+        cout << "Vértice não existe" << endl ; 
         return;
-        cout << "Vertice não existe" << endl ; 
     }
 
     for(No* vizinho : no_remover->vizinhos) {
