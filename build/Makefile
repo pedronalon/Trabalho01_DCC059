@@ -136,6 +136,30 @@ run/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/build
 .PHONY : run/fast
 
+grafo.o: grafo.cpp.o
+.PHONY : grafo.o
+
+# target to build an object file
+grafo.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/grafo.cpp.o
+.PHONY : grafo.cpp.o
+
+grafo.i: grafo.cpp.i
+.PHONY : grafo.i
+
+# target to preprocess a source file
+grafo.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/grafo.cpp.i
+.PHONY : grafo.cpp.i
+
+grafo.s: grafo.cpp.s
+.PHONY : grafo.s
+
+# target to generate assembly for a file
+grafo.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/grafo.cpp.s
+.PHONY : grafo.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -170,6 +194,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... run"
+	@echo "... grafo.o"
+	@echo "... grafo.i"
+	@echo "... grafo.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

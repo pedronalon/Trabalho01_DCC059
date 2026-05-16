@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/pedro/CLionProjects/Trabalho01_DCC059/grafo.cpp" "CMakeFiles/run.dir/grafo.cpp.o" "gcc" "CMakeFiles/run.dir/grafo.cpp.o.d"
   "/home/pedro/CLionProjects/Trabalho01_DCC059/main.cpp" "CMakeFiles/run.dir/main.cpp.o" "gcc" "CMakeFiles/run.dir/main.cpp.o.d"
   "" "run" "gcc" "CMakeFiles/run.dir/link.d"
   )

@@ -1,5 +1,5 @@
-CMakeFiles/run.dir/main.cpp.o: \
- /home/pedro/CLionProjects/Trabalho01_DCC059/main.cpp \
+CMakeFiles/run.dir/grafo.cpp.o: \
+ /home/pedro/CLionProjects/Trabalho01_DCC059/grafo.cpp \
  /usr/include/stdc-predef.h \
  /home/pedro/CLionProjects/Trabalho01_DCC059/grafo.hpp \
  /usr/include/c++/15.2.0/vector \

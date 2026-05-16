@@ -3,6 +3,7 @@ run: \
   /usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/../../../x86_64-linux-gnu/crti.o \
   /usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/crtbeginS.o \
   CMakeFiles/run.dir/main.cpp.o \
+  CMakeFiles/run.dir/grafo.cpp.o \
   /usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/../../../x86_64-linux-gnu/libstdc++.so \
   /usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/../../../x86_64-linux-gnu/libm.so \
   /usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/../../../x86_64-linux-gnu/libm.so \
@@ -38,6 +39,8 @@ run: \
 /usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/crtbeginS.o:
 
 CMakeFiles/run.dir/main.cpp.o:
+
+CMakeFiles/run.dir/grafo.cpp.o:
 
 /usr/lib/gcc/x86_64-unknown-linux-gnu/15.2.0/../../../x86_64-linux-gnu/libstdc++.so:
 
