@@ -44,6 +44,14 @@ public:
     void  adicionar_vertice();
     void remover_vertice(int n); 
 
+    void imprimir_vizinhos(int u);
+
+    int grau(int u);
+    int grau_entrada(int u);
+    int grau_saida(int u);
+    int grau_total(int u);
+
+
     void busca_profundidade_recursiva(int inicio);
     void busca_profundidade_iterativa(int inicio);
     void busca_largura(int inicio);

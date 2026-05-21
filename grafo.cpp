@@ -192,6 +192,31 @@ void Grafo::imprimirPesos()
         std::cout << "\n";
     }
 }
+
+
+void Grafo::imprimir_vizinhos(int u){
+    for(No* v : nos[u]->vizinhos)
+        cout<<v->id<<" ";
+
+    cout<<endl;
+}
+
+int Grafo::grau(int u){
+    return nos[u]->grau_saida;
+}
+
+int Grafo::grau_entrada(int u){
+    return nos[u]->grau_entrada;
+}
+
+int Grafo::grau_saida(int u){
+    grau(u);
+}
+
+int Grafo::grau_total(int u){
+    return nos[u]->grau_saida + nos[u]->grau_entrada;
+}
+
 // ------------------------------------
 // EXEMPLO:
 // Busca em profundidade (recursiva)
