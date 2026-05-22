@@ -51,6 +51,8 @@ public:
     int grau_saida(int u);
     int grau_total(int u);
 
+    void dijkstra(int origem);
+
 
     void busca_profundidade_recursiva(int inicio);
     void busca_profundidade_iterativa(int inicio);

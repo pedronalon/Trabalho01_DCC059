@@ -200,6 +200,9 @@ void Grafo::imprimir_vizinhos(int u){
 
     cout<<endl;
 }
+// ------------------------------------
+// GRAU
+// ------------------------------------
 
 int Grafo::grau(int u){
     return nos[u]->grau_saida;
@@ -215,6 +218,73 @@ int Grafo::grau_saida(int u){
 
 int Grafo::grau_total(int u){
     return nos[u]->grau_saida + nos[u]->grau_entrada;
+}
+
+// ------------------------------------
+// DIJKSTRA
+// ------------------------------------
+
+void Grafo::dijkstra(int origem) {
+    // vê se o vértice existe
+    if (origem < 0 || origem >= num_vertices) {
+        cout << "vertice invalido.\n";
+        return;
+    }
+
+    // Fila de prioridade: armazena pares (distancia, id_do_vertice)
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> fila;
+
+    // Vetores para rastrear as distâncias e o caminho feito
+    vector<int> dist(num_vertices, INT_MAX);
+    vector<int> pai(num_vertices, -1); // Guarda de qual vértice viemos para chegar no atual
+
+    dist[origem] = 0;
+    fila.push({0, origem});
+
+    while (!fila.empty()) {
+        int d_atual = fila.top().first;
+        int u = fila.top().second;
+        fila.pop();
+
+        if (d_atual > dist[u]) continue;
+
+        // percorre os vizinhos
+        for (No* viz : nos[u]->vizinhos) {
+            int v = viz->id; 
+            
+            // busca o peso entre u e v na matriz 
+            int peso = matrizPesos[u][v]; 
+
+            // se encontrar caminho menor, atualizamos pi*
+            if (dist[u] + peso < dist[v]) {
+                dist[v] = dist[u] + peso;
+                pai[v] = u; // Registramos que para chegar em 'v' rápido, viemos de 'u'
+                fila.push({dist[v], v});
+            }
+        }
+    }
+
+    // --- Impressão dos Resultados ---
+    std::cout << "\n[ Dijkstra ] Resultados a partir do vertice " << origem << ":\n";
+    for (int i = 0; i < num_vertices; ++i) {
+        if (dist[i] == INT_MAX) {
+            std::cout << " -> Vertice " << i << ": Inalcancavel\n";
+        } else {
+            std::cout << " -> Vertice " << i << " | Custo total: " << dist[i] << " | Caminho: ";
+            
+            // Reconstruindo o caminho usando o vetor 'pai'
+            vector<int> caminho;
+            for (int atual = i; atual != -1; atual = pai[atual]) {
+                caminho.push_back(atual);
+            }
+            
+            // Como rastreamos de trás para frente, imprimimos na ordem reversa
+            for (int k = caminho.size() - 1; k >= 0; --k) {
+                std::cout << caminho[k] << (k == 0 ? "" : " -> ");
+            }
+            std::cout << "\n";
+        }
+    }
 }
 
 // ------------------------------------
