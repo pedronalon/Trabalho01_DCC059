@@ -20,15 +20,15 @@ all: $(TARGET)
 	@:
 
 $(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
+	@$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
 
 %.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+	@$(CXX) $(CXXFLAGS) -c $< -o $@
 
 $(OBJS): grafo.hpp
 
 clean:
-	$(RM_CMD)
+	@$(RM_CMD)
 
 run: $(TARGET)
-	$(RUN_CMD)
+	@$(RUN_CMD)
