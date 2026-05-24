@@ -1,5 +1,8 @@
 #include "grafo.hpp"
 #include <vector>
+#include <climits>
+
+
 No::No(int id) : id(id), visitado(false), grau_entrada(0), grau_saida(0) {}
 
 Grafo::Grafo(int n) : num_vertices(n)
@@ -67,8 +70,8 @@ void Grafo::remover_vertice(int i) {
             matrizPesos.erase(matrizPesos.begin() + pos_grafo);
             for(int k = 0; k < matrizPesos.size(); k++) {
         matrizPesos[k].erase(matrizPesos[k].begin() + pos_grafo);
-        num_vertices--;
     }
+    num_vertices--;
             break; 
         }
         pos_grafo++; 
@@ -111,7 +114,7 @@ void Grafo::remover_aresta(int u, int v, bool direcionado)
             nos[u]->vizinhos.erase(nos[u]->vizinhos.begin() + pos);
             nos[u]->grau_saida--;
             nos[v]->grau_entrada--;
-            matrizPesos[v][u] = 0;
+            matrizPesos[u][v] = 0; 
             break;
         }
         pos++;
@@ -127,38 +130,48 @@ void Grafo::remover_aresta(int u, int v, bool direcionado)
                 nos[v]->vizinhos.erase(nos[v]->vizinhos.begin() + pos);
                 nos[v]->grau_saida--;
                 nos[u]->grau_entrada--;
-                matrizPesos[u][v] = 0;
+                matrizPesos[v][u] = 0; 
                 break;
             }
             pos++;
         }
     }
 }
-
 bool Grafo::verificar_aresta(int u, int v, bool direcionado)
 {
-    for (No *viz : nos[u]->vizinhos)
+    int idx_u = -1;
+    int idx_v = -1;
+
+    for (int k = 0; k < nos.size(); k++) {
+        if (nos[k]->id == u) idx_u = k;
+        if (nos[k]->id == v) idx_v = k;
+    }
+
+    if (idx_u == -1 || idx_v == -1) {
+        return false;
+    }
+
+    for (No *viz : nos[idx_u]->vizinhos)
     {
         if (viz->id == v)
         {
-            return 1;
+            return true;
         }
     }
 
     if (!direcionado)
     {
-        for (No *viz : nos[v]->vizinhos)
+        for (No *viz : nos[idx_v]->vizinhos)
         {
             if (viz->id == u)
             {
-                return 1;
+                return true;
             }
         }
     }
 
-    return 0;
+    return false;
 }
-
 void Grafo::alterar_peso(int u, int v, bool direcionado, int peso)
 {
 
@@ -205,19 +218,25 @@ void Grafo::imprimir_vizinhos(int u){
 // ------------------------------------
 
 int Grafo::grau(int u){
-    return nos[u]->grau_saida;
+    int idx = obter_indice(u);
+    if (idx == -1) return 0; 
+    return nos[idx]->grau_saida;
 }
 
 int Grafo::grau_entrada(int u){
-    return nos[u]->grau_entrada;
+    int idx = obter_indice(u);
+    if (idx == -1) return 0;
+    return nos[idx]->grau_entrada;
 }
 
 int Grafo::grau_saida(int u){
-    grau(u);
+    return grau(u); 
 }
 
 int Grafo::grau_total(int u){
-    return nos[u]->grau_saida + nos[u]->grau_entrada;
+    int idx = obter_indice(u);
+    if (idx == -1) return 0;
+    return nos[idx]->grau_saida + nos[idx]->grau_entrada;
 }
 
 // ------------------------------------
@@ -311,6 +330,19 @@ void Grafo::aux_profundidade_recursiva(No *no)
         }
     }
 }
+
+
+
+
+int Grafo::obter_indice(int id_vertice) {
+    for (size_t i = 0; i < nos.size(); i++) {
+        if (nos[i]->id == id_vertice) {
+            return i; 
+        }
+    }
+    return -1; 
+}
+
 
 // ------------------------------------
 // Exercício 01

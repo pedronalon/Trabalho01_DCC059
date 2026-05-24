@@ -30,6 +30,8 @@ private:
 
     void limpar_visitados();
 
+    int obter_indice(int id_vertice);
+
 public:
     Grafo(int n);
     ~Grafo();
