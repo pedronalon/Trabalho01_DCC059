@@ -2,6 +2,20 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <fstream>
+#include <string>
+
+ /*
+ arquivo txt no formato:
+
+ número de vertices
+ vertice_inicial_1    vertice_final_1  peso_1 
+ vertice_inicial_2    vertice_final_2  peso_2
+ ...
+ vertice_inicial_n    vertice_final_n  peso_n
+
+ */
+
 
 void testAll() {
     // Instanciando suas classes diretamente (iniciando com 0 vértices)
@@ -367,6 +381,9 @@ void testAll() {
     std::cout << "  EXCECOES CAPTURADAS: " << excecoes << "\n";
     std::cout << "  TOTAL DE CASOS TESTADOS: " << (passou + falhou + excecoes) << "\n";
     std::cout << "==================================================\n";
+
+    Grafo g_txt("grafo.txt", false);
+    g_txt.exportar_dot("grafo.dot", false);
 }
 
 int main() {

@@ -1,6 +1,8 @@
 #include "grafo.hpp"
 #include <vector>
 #include <climits>
+#include <fstream>
+#include <string>
 
 
 No::No(int id) : id(id), visitado(false), grau_entrada(0), grau_saida(0) {}
@@ -9,14 +11,40 @@ Grafo::Grafo(int n) : num_vertices(n)
 {
 
     for (int i = 0; i < n; i++)
-
-    {
-
         nos.push_back(new No(i));
-    }
-
+    
     matrizPesos.assign(n, vector<int>(n, 0));
 }
+
+
+Grafo::Grafo(const std::string& nome_arquivo, bool direcionado) {
+    std::ifstream arquivo(nome_arquivo);
+
+    if (!arquivo.is_open()) {
+        std::cerr << "Erro: Nao foi possivel abrir o arquivo '" << nome_arquivo << "'!\n";
+        this->num_vertices = 0; // Inicia vazio por segurança
+        return;
+    }
+
+    // pega a primeira linha
+    arquivo >> this->num_vertices;
+
+    
+    for (int i = 0; i < this->num_vertices; i++) {
+        nos.push_back(new No(i));
+    }
+    matrizPesos.assign(this->num_vertices, vector<int>(this->num_vertices, 0));
+
+    // agora o resto do arquivo e insere as arestas
+    int u, v, peso;
+    while (arquivo >> u >> v >> peso) 
+        adicionar_aresta(u, v, direcionado, peso); 
+    
+
+    arquivo.close();
+}
+
+
 
 Grafo::~Grafo()
 {
@@ -306,31 +334,6 @@ void Grafo::dijkstra(int origem) {
     }
 }
 
-// ------------------------------------
-// EXEMPLO:
-// Busca em profundidade (recursiva)
-// ------------------------------------
-
-void Grafo::busca_profundidade_recursiva(int inicio)
-{
-    limpar_visitados();
-    aux_profundidade_recursiva(nos[inicio]);
-}
-
-void Grafo::aux_profundidade_recursiva(No *no)
-{
-    no->visitado = true;
-    std::cout << no->id << " ";
-
-    for (No *viz : no->vizinhos)
-    {
-        if (!viz->visitado)
-        {
-            aux_profundidade_recursiva(viz);
-        }
-    }
-}
-
 
 
 
@@ -344,31 +347,42 @@ int Grafo::obter_indice(int id_vertice) {
 }
 
 
-// ------------------------------------
-// Exercício 01
-// Busca em profundidade (iterativa)
-// ------------------------------------
+void Grafo::exportar_dot(const string& nome_arquivo, bool direcionado) {
+    ofstream arquivo(nome_arquivo);
 
-void Grafo::busca_profundidade_iterativa(int inicio)
-{
-    limpar_visitados();
-}
+    if (!arquivo.is_open()) {
+        cerr << "Erro ao criar o arquivo DOT.\n";
+        return;
+    }
 
-// ------------------------------------
-// Exercício 02
-// Busca em largura
-// ------------------------------------
+    // inicia o cabeçalho dependendo do tipo do grafo
+    if (direcionado) {
+        arquivo << "digraph G {\n";
+    } else {
+        arquivo << "graph G {\n";
+    }
 
-void Grafo::busca_largura(int inicio)
-{
-    limpar_visitados();
-}
 
-// ------------------------------------
-// Exercicio 03
-// Ordenação topológica
-// ------------------------------------
+    for (int u = 0; u < num_vertices; u++) {
+        for (No* viz : nos[u]->vizinhos) {
+            int v = viz->id;
+            int peso = matrizPesos[u][v];
 
-void Grafo::ordenacao_topologica()
-{
+           
+            // Para não desenhar a mesma linha duas vezes, só exportamos quando u < v.
+            if (!direcionado && u > v) {
+                continue; 
+            }
+
+            // Escreve a aresta no arquivo
+            if (direcionado) {
+                arquivo << "  " << u << " -> " << v << " [label=\"" << peso << "\"];\n";
+            } else {
+                arquivo << "  " << u << " -- " << v << " [label=\"" << peso << "\"];\n";
+            }
+        }
+    }
+
+    arquivo << "}\n";
+    arquivo.close();
 }

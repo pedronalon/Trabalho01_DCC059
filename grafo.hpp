@@ -5,6 +5,8 @@
 #include <queue>
 #include <stack>
 #include <iostream>
+#include <fstream>
+#include <string>
 
 using namespace std;
 
@@ -34,6 +36,7 @@ private:
 
 public:
     Grafo(int n);
+    Grafo(const std::string& nome_arquivo, bool direcionado);
     ~Grafo();
 
     void adicionar_aresta(int u, int v, bool direcionado = false, int peso = 0);
@@ -55,14 +58,10 @@ public:
 
     void dijkstra(int origem);
 
-
-    void busca_profundidade_recursiva(int inicio);
-    void busca_profundidade_iterativa(int inicio);
-    void busca_largura(int inicio);
-    void ordenacao_topologica();
+    void exportar_dot(const string& nome_arquivo, bool direcionado);
 
 private:
-    void aux_profundidade_recursiva(No *no);
+    
 };
 
 #endif
