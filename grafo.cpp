@@ -5,6 +5,7 @@
 #include <string>
 
 
+
 No::No(int id) : id(id), visitado(false), grau_entrada(0), grau_saida(0) {}
 
 Grafo::Grafo(int n) : num_vertices(n)
@@ -17,12 +18,12 @@ Grafo::Grafo(int n) : num_vertices(n)
 }
 
 
-Grafo::Grafo(const std::string& nome_arquivo, bool direcionado) {
-    std::ifstream arquivo(nome_arquivo);
+Grafo::Grafo(const string& nome_arquivo, bool direcionado) {
+    ifstream arquivo(nome_arquivo);
 
     if (!arquivo.is_open()) {
-        std::cerr << "Erro: Nao foi possivel abrir o arquivo '" << nome_arquivo << "'!\n";
-        this->num_vertices = 0; // Inicia vazio por segurança
+        cerr << "Erro: Nao foi possivel abrir o arquivo '" << nome_arquivo << "'!\n";
+        this->num_vertices = 0; 
         return;
     }
 
@@ -213,12 +214,12 @@ void Grafo::imprimir()
 {
     for (No *no : nos)
     {
-        std::cout << no->id << ": ";
+        cout << no->id << ": ";
         for (No *viz : no->vizinhos)
         {
-            std::cout << viz->id << " ";
+            cout << viz->id << " ";
         }
-        std::cout << "\n";
+        cout << "\n";
     }
 }
 
@@ -228,9 +229,9 @@ void Grafo::imprimirPesos()
     {
         for (int j = 0; j < num_vertices; j++)
         {
-            std::cout << matrizPesos[i][j] << " ";
+            cout << matrizPesos[i][j] << " ";
         }
-        std::cout << "\n";
+        cout << "\n";
     }
 }
 
@@ -312,12 +313,12 @@ void Grafo::dijkstra(int origem) {
     }
 
     // --- Impressão dos Resultados ---
-    std::cout << "\n[ Dijkstra ] Resultados a partir do vertice " << origem << ":\n";
+    cout << "\n[ Dijkstra ] Resultados a partir do vertice " << origem << ":\n";
     for (int i = 0; i < num_vertices; ++i) {
         if (dist[i] == INT_MAX) {
-            std::cout << " -> Vertice " << i << ": Inalcancavel\n";
+            cout << " -> Vertice " << i << ": Inalcancavel\n";
         } else {
-            std::cout << " -> Vertice " << i << " | Custo total: " << dist[i] << " | Caminho: ";
+            cout << " -> Vertice " << i << " | Custo total: " << dist[i] << " | Caminho: ";
             
             // Reconstruindo o caminho usando o vetor 'pai'
             vector<int> caminho;
@@ -327,9 +328,9 @@ void Grafo::dijkstra(int origem) {
             
             // Como rastreamos de trás para frente, imprimimos na ordem reversa
             for (int k = caminho.size() - 1; k >= 0; --k) {
-                std::cout << caminho[k] << (k == 0 ? "" : " -> ");
+                cout << caminho[k] << (k == 0 ? "" : " -> ");
             }
-            std::cout << "\n";
+            cout << "\n";
         }
     }
 }
@@ -338,7 +339,7 @@ void Grafo::dijkstra(int origem) {
 
 
 int Grafo::obter_indice(int id_vertice) {
-    for (size_t i = 0; i < nos.size(); i++) {
+    for (int i = 0; i < nos.size(); i++) {
         if (nos[i]->id == id_vertice) {
             return i; 
         }
