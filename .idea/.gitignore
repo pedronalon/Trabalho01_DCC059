@@ -10,7 +10,9 @@
 /httpRequests/
 /build/
 /cmake-build-*/
-
 *.o
+*.exe
+*.out
+Trabalho01_DCC059
 
 /Trabalho01_DCC059
