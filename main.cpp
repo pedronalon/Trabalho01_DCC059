@@ -384,6 +384,7 @@ void testAll() {
 
     Grafo g_txt("grafo.txt", false);
     g_txt.exportar_dot("grafo.dot", false);
+    g_txt.dijkstra(0) ; 
 }
 
 int main() {
