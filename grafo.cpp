@@ -279,12 +279,12 @@ void Grafo::dijkstra(int origem) {
         return;
     }
 
-    // Fila de prioridade: armazena pares (distancia, id_do_vertice)
+    // fila de prioridade armazena pares (distancia, id_do_vertice)
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> fila;
 
-    // Vetores para rastrear as distâncias e o caminho feito
+    // vetores para rastrear as distancias e o caminho feito
     vector<int> dist(num_vertices, INT_MAX);
-    vector<int> pai(num_vertices, -1); // Guarda de qual vértice viemos para chegar no atual
+    vector<int> pai(num_vertices, -1); 
 
     dist[origem] = 0;
     fila.push({0, origem});
@@ -306,19 +306,19 @@ void Grafo::dijkstra(int origem) {
             // se encontrar caminho menor, atualizamos pi*
             if (dist[u] + peso < dist[v]) {
                 dist[v] = dist[u] + peso;
-                pai[v] = u; // Registramos que para chegar em 'v' rápido, viemos de 'u'
+                pai[v] = u; 
                 fila.push({dist[v], v});
             }
         }
     }
 
-    // --- Impressão dos Resultados ---
-    cout << "\n[ Dijkstra ] Resultados a partir do vertice " << origem << ":\n";
+   
+    cout << "\n[Dijkstra] Resultados a partir do vertice " << origem << ":\n";
     for (int i = 0; i < num_vertices; ++i) {
         if (dist[i] == INT_MAX) {
-            cout << " -> Vertice " << i << ": Inalcancavel\n";
+            cout << "  Vertice " << i << ": Inalcancavel\n";
         } else {
-            cout << " -> Vertice " << i << " | Custo total: " << dist[i] << " | Caminho: ";
+            cout << "  Vertice " << i << " | Custo total: " << dist[i] << " | Caminho: ";
             
             // Reconstruindo o caminho usando o vetor 'pai'
             vector<int> caminho;
